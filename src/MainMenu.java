@@ -5,7 +5,7 @@ public class MainMenu {
 
     static String menu() { // method to print menu and get users choice
         Scanner input = new Scanner(System.in); // Scanner to get an input
-        String menu = ("==============================" +
+        String menu = ("\n==============================" +
                 "\nWelcome to the To Do list!" +
                 "\nWhat would you like to do?" +
                 "\n  1. " +
@@ -33,9 +33,14 @@ public class MainMenu {
         Scanner input = new Scanner(System.in); // Scanner to get an input
         System.out.println("What is the item number of the item you want to delete?");
         int itemNo = input.nextInt(); // get the item the user wants to remove
-        System.out.println("Removing item " + itemNo + ": " + list.get(itemNo-1)); // output to user the item being removed
-        list.remove((itemNo-1)); // remove item from list
-        return(list); // return modified list
+        itemNo--; // list index starts at 0 and item numbers are one above
+        if(itemNo > -1 && itemNo < list.size()) {
+            System.out.println("Removing item " + (itemNo + 1) + ": " + list.get(itemNo)); // output to user the item being removed
+            list.remove((itemNo)); // remove item from list
+        }else{ //
+            System.out.println("Error, returning to menu");
+        }
+        return(list); // return new list
     }
 
     public static void main(String[] args) {
@@ -48,7 +53,7 @@ public class MainMenu {
             switch (menuChoice) {
                 case "1" -> list.add(listAdd()); // uses the listAdd method to get an item to add to the list and uses the ArrayList Add() method to add the item to the list
                 case "2" -> listPrint(list); // listPrint method with the list as a parameter
-                case "3" -> list = listRemove(list); // run listRemove method that removes an item from a list and set this to the list variable
+                case "3" -> listRemove(list); // run listRemove method that removes an item from a list and set this to the list variable
                 case "4" -> {
                     System.out.println("Goodbye");
                     exitProg = true;
