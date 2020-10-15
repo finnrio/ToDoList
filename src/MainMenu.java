@@ -23,9 +23,13 @@ public class MainMenu {
         return(input.next());
     }
 
+    static void listPrint(ArrayList<String> list) { // method to output the list to the user
+        for(int i = 0; i < list.size(); i++){ // for loop that runs the size of the list
+            System.out.println(i+1 + ". " + list.get(i)); // prints the list item position followed by the item
+        }
+    }
+
     public static void main(String[] args) {
-
-
         boolean exitProg = false;  // bool to control if the program is running
 
         ArrayList<String> list = new ArrayList<>();
@@ -34,7 +38,7 @@ public class MainMenu {
             String menuChoice = menu();
             switch (menuChoice) {
                 case "1" -> list.add(listAdd()); // uses the listAdd method to get an item to add to the list and uses the ArrayList Add() method to add the item to the list
-                case "2" -> System.out.println("option 2");
+                case "2" -> listPrint(list); // listPrint method with the list as a parameter
                 case "3" -> System.out.println("option 3");
                 case "4" -> {
                     System.out.println("Goodbye");
