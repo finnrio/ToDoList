@@ -29,6 +29,15 @@ public class MainMenu {
         }
     }
 
+    static ArrayList<String> listRemove(ArrayList<String> list) { // method to remove a specific item from a list
+        Scanner input = new Scanner(System.in); // Scanner to get an input
+        System.out.println("What is the item number of the item you want to delete?");
+        int itemNo = input.nextInt(); // get the item the user wants to remove
+        System.out.println("Removing item " + itemNo + ": " + list.get(itemNo-1)); // output to user the item being removed
+        list.remove((itemNo-1)); // remove item from list
+        return(list); // return modified list
+    }
+
     public static void main(String[] args) {
         boolean exitProg = false;  // bool to control if the program is running
 
@@ -39,7 +48,7 @@ public class MainMenu {
             switch (menuChoice) {
                 case "1" -> list.add(listAdd()); // uses the listAdd method to get an item to add to the list and uses the ArrayList Add() method to add the item to the list
                 case "2" -> listPrint(list); // listPrint method with the list as a parameter
-                case "3" -> System.out.println("option 3");
+                case "3" -> list = listRemove(list); // run listRemove method that removes an item from a list and set this to the list variable
                 case "4" -> {
                     System.out.println("Goodbye");
                     exitProg = true;
