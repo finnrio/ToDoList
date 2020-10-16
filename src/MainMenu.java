@@ -1,9 +1,7 @@
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList; // import the ArrayList class
-import java.io.File;  // Import the File class
-import java.io.IOException; // Import the IOException class to handle errors (for files)
+
 
 public class MainMenu {
 
@@ -30,9 +28,18 @@ public class MainMenu {
         printWriter.close(); // close the file
     }
 
-    static void listPrint(ArrayList<String> list) { // method to output the list to the user
-        for(int i = 0; i < list.size(); i++){ // for loop that runs the size of the list
-            System.out.println(i+1 + ". " + list.get(i)); // prints the list item position followed by the item
+    static void listPrint() { // method to read the list file to the user
+        try { // try statement to catch errors
+            File listFile = new File("MyToDoList.txt"); // call the file
+            Scanner reader = new Scanner(listFile); // Scanner called reader to read the file
+            while (reader.hasNextLine()) { // if there is a line in front of the scanner the loop will continue
+                String data = reader.nextLine();
+                System.out.println(data); // prints the data in the next line
+            }
+            reader.close(); // close reader once it is finished with
+        } catch(FileNotFoundException e){ // if the file does not exist this error will be caught
+            System.out.println("Error, no file found.");
+            e.printStackTrace();
         }
     }
 
@@ -55,13 +62,13 @@ public class MainMenu {
 
         //ArrayList<String> list = new ArrayList<>();
 
-        File listFile = new File("MyToDoList.txt");
+        // File listFile = new File("MyToDoList.txt");
 
         do{ // do loop that returns the user to the menu until they chose to exit the program
             String menuChoice = menu();
             switch (menuChoice) {
                 case "1" -> listAdd(); // uses the listAdd method to get an item write this to the listFile file
-                //case "2" -> listPrint(list); // listPrint method with the list as a parameter
+                case "2" -> listPrint(); // listPrint method will print the list from the list file
                 //case "3" -> listRemove(list); // run listRemove method that removes an item from a list and set this to the list variable
                 case "4" -> {
                     System.out.println("Goodbye");
