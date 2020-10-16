@@ -22,12 +22,12 @@ public class MainMenu {
     }
 
     static void listAdd() throws IOException { // method that asks for an item for the list and writes this to a file
-        FileWriter listFile =  new FileWriter("MyToDoList.txt", true);
-        PrintWriter printWriter = new PrintWriter(listFile);
-        Scanner input = new Scanner(System.in); // Scanner to get an input
+        FileWriter listFile =  new FileWriter("MyToDoList.txt", true); // opens the file we want to write to
+        PrintWriter printWriter = new PrintWriter(listFile); // uses the file from FileWriter with PrintWriter to print the items to the file. Using print with FileWrite will not append the file it will rewrite it.
+        Scanner input = new Scanner(System.in); // Scanner that is used to get an input
         System.out.println("What would you like to add to the list?");
-        printWriter.print("\n" + input.nextLine());
-        printWriter.close();
+        printWriter.print(input.nextLine() + "\n"); // prints the input to the file and then starts a new line
+        printWriter.close(); // close the file
     }
 
     static void listPrint(ArrayList<String> list) { // method to output the list to the user
