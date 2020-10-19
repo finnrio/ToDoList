@@ -1,22 +1,15 @@
 import java.io.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList; // import the ArrayList class
 
 public class MainMenu {
 
-    public static class ListObj{
+    public static class ListObj { // class for list items
         String name;
         LocalDateTime dateTime;
-
-        /// create a method to create an object
-        static ListObj createObject(){
-            ListObj myObj = new ListObj();
-            myObj.dateTime = LocalDateTime.now();
-            return myObj;
-        }
-
     }
 
     static String menu() { // method to print menu and get users choice
@@ -72,21 +65,32 @@ public class MainMenu {
         return(list); // return new list to program
     }
 
-    static List<ListObj> listAdd(List list) { // method that asks for and returns a string, used to get an item to add to the list
+    static List<ListObj> listAdd(ArrayList<ListObj> list) { // method that asks for and returns a string, used to get an item to add to the list
         Scanner input = new Scanner(System.in); // Scanner to get an input
         System.out.println("What would you like to add to the list?");
-        String itemName = input.nextLine();
-        ListObj itemObj = new ListObj();
-        itemObj.name = itemName;
-        itemObj.dateTime = LocalDateTime.now();
-        list.add(itemObj);
-        return(list);
+        String itemName = input.nextLine(); // input to get the new item for the list from user
+        ListObj itemObj = new ListObj(); // create a new object
+        itemObj.name = itemName; // set new objects name
+        itemObj.dateTime = LocalDateTime.now(); // set new objects date and time stamp
+        list.add(itemObj); // add new object to list
+        return(list); // return new list to program
     }
 
     static void listPrint(List<ListObj> list) { // method to output the list to the user
         for(int i = 0; i < list.size(); i++){ // for loop that runs the size of the list
-            System.out.println(i+1 + ". " + list.get(i)); // prints the list item position followed by the item
+            ListObj item = list.get(i); // get item in list
+            String itemName = item.name; // get name of item object
+            String dateTime = formatDateTime(item.dateTime); // get formatted date and time stamp of item object
+            int position = i + 1; // get position in list
+            System.out.println(position + ". " + itemName + "\n   " + dateTime); // prints the list item position followed by the name and date and time stamp
         }
+    }
+
+    static String formatDateTime(LocalDateTime DT){ // method to formatt
+        // for date and time stamp
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");
+        String formattedDT = DT.format(formatter);
+        return formattedDT;
     }
 
     static void listRemove(List<ListObj> list) { // method to remove a specific item from a list
@@ -95,7 +99,7 @@ public class MainMenu {
         int itemNo = input.nextInt(); // get the item the user wants to remove
         itemNo--; // list index starts at 0 and item numbers are one above
         if(itemNo > -1 && itemNo < list.size()) {
-            System.out.println("Removing item " + (itemNo + 1) + ": " + list.get(itemNo)); // output to user the item being removed
+            System.out.println("Removing item " + (itemNo + 1) + ": " + list.get(itemNo).name); // output to user the item being removed
             list.remove((itemNo)); // remove item from list
         }else{ //
             System.out.println("Error, returning to menu");
@@ -105,17 +109,17 @@ public class MainMenu {
     public static void main(String[] args) throws IOException {
         boolean exitProg = false;  // bool to control if the program is running
 
-        List<ListObj> toDoList = null; // = loadList(); // declare the current list as whatever is in the file
+        ArrayList<ListObj> toDoList = new ArrayList<>(); // declare the current list
 
         do{ // do loop that returns the user to the menu until they chose to exit the program
             String menuChoice = menu();
             switch (menuChoice) {
-                case "1" -> listAdd(toDoList); // uses the listAdd method to get an item to add to the list and uses the ArrayList Add() method to add the item to the list
+                case "1" -> listAdd(toDoList); // uses the listAdd method to add an item to the list
                 case "2" -> listPrint(toDoList); // listPrint method with the list as a parameter
                 case "3" -> listRemove(toDoList); // run listRemove method that removes an item from a list and set this to the list variable
                 case "4" -> { // this case saves the list to a file when you are finished with the program
                     System.out.println("Goodbye");
-                    listSave(toDoList); // method to save the toDoList list to a file
+                    //listSave(toDoList); // method to save the toDoList list to a file
                     exitProg = true;
                 }
                 // default catch all for any invalid inputs the the menu
