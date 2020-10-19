@@ -1,9 +1,23 @@
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList; // import the ArrayList class
 
 public class MainMenu {
+
+    public static class ListObj{
+        String name;
+        LocalDateTime dateTime;
+
+        /// create a method to create an object
+        static ListObj createObject(){
+            ListObj myObj = new ListObj();
+            myObj.dateTime = LocalDateTime.now();
+            return myObj;
+        }
+
+    }
 
     static String menu() { // method to print menu and get users choice
         Scanner input = new Scanner(System.in); // Scanner to get an input
@@ -19,7 +33,7 @@ public class MainMenu {
         return (input.next());
     }
 
-    static void saveWriter(List<Object> newList, int line, File file) throws IOException { // method to save the current List to a file (MyToDoList.txt)
+    static void saveWriter(List<ListObj> newList, int line, File file) throws IOException { // method to save the current List to a file (MyToDoList.txt)
         FileWriter fw = new FileWriter(file, true); // open the file in append mode
         PrintWriter pw = new PrintWriter(fw); // declare the print writer
         Object lineToWrite = newList.get(line); // get the object that will be written
@@ -27,7 +41,7 @@ public class MainMenu {
         pw.close(); // close the writer
     }
 
-    static void listSave(List<Object> list) throws IOException { // method to write a list to a file
+    static void listSave(List<ListObj> list) throws IOException { // method to write a list to a file
         File file = new File("MyToDoList.txt"); // Declare the file used to store the list
         FileWriter deleteFile = new FileWriter(file); // this is used to remove the current contents of the file. Which will later be removed when we load a list from a file.
         try{
@@ -42,14 +56,14 @@ public class MainMenu {
         }
     }
 
-    static List loadList() throws FileNotFoundException { // create a new list by reading each line of a file to a new item in the list
-        List list = new ArrayList(); // declare list
+    static List<ListObj> loadList() { // create a new list by reading each line of a file to a new item in the list
+        List<ListObj> list = new ArrayList(); // declare list
         try {
             File file = new File("MyToDoList.txt"); // declare file
             Scanner reader = new Scanner(file); // create a reader for the file
             while(reader.hasNextLine()){
-                Object item = reader.nextLine(); // set the next line in file to the item object
-                list.add(item); // add the item to the list
+                String item = reader.nextLine(); // set the next line in file to the item object
+                list.add(new ListObj()); // add the item to the list
             }
             reader.close();
         } catch (FileNotFoundException e) {
@@ -58,19 +72,24 @@ public class MainMenu {
         return(list); // return new list to program
     }
 
-    static String listAdd() { // method that asks for and returns a string, used to get an item to add to the list
+    static List<ListObj> listAdd(List list) { // method that asks for and returns a string, used to get an item to add to the list
         Scanner input = new Scanner(System.in); // Scanner to get an input
         System.out.println("What would you like to add to the list?");
-        return(input.nextLine());
+        String itemName = input.nextLine();
+        ListObj itemObj = new ListObj();
+        itemObj.name = itemName;
+        itemObj.dateTime = LocalDateTime.now();
+        list.add(itemObj);
+        return(list);
     }
 
-    static void listPrint(List<Object> list) { // method to output the list to the user
+    static void listPrint(List<ListObj> list) { // method to output the list to the user
         for(int i = 0; i < list.size(); i++){ // for loop that runs the size of the list
             System.out.println(i+1 + ". " + list.get(i)); // prints the list item position followed by the item
         }
     }
 
-    static void listRemove(List<Object> list) { // method to remove a specific item from a list
+    static void listRemove(List<ListObj> list) { // method to remove a specific item from a list
         Scanner input = new Scanner(System.in); // Scanner to get an input
         System.out.println("What is the item number of the item you want to delete?");
         int itemNo = input.nextInt(); // get the item the user wants to remove
@@ -86,12 +105,12 @@ public class MainMenu {
     public static void main(String[] args) throws IOException {
         boolean exitProg = false;  // bool to control if the program is running
 
-        List toDoList = loadList(); // declare the current list as whatever is in the file
+        List<ListObj> toDoList = null; // = loadList(); // declare the current list as whatever is in the file
 
         do{ // do loop that returns the user to the menu until they chose to exit the program
             String menuChoice = menu();
             switch (menuChoice) {
-                case "1" -> toDoList.add(listAdd()); // uses the listAdd method to get an item to add to the list and uses the ArrayList Add() method to add the item to the list
+                case "1" -> listAdd(toDoList); // uses the listAdd method to get an item to add to the list and uses the ArrayList Add() method to add the item to the list
                 case "2" -> listPrint(toDoList); // listPrint method with the list as a parameter
                 case "3" -> listRemove(toDoList); // run listRemove method that removes an item from a list and set this to the list variable
                 case "4" -> { // this case saves the list to a file when you are finished with the program
