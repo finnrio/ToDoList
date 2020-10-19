@@ -42,6 +42,22 @@ public class MainMenu {
         }
     }
 
+    static List loadList() throws FileNotFoundException { // create a new list by reading each line of a file to a new item in the list
+        List list = new ArrayList(); // declare list
+        try {
+            File file = new File("MyToDoList.txt"); // declare file
+            Scanner reader = new Scanner(file); // create a reader for the file
+            while(reader.hasNextLine()){
+                Object item = reader.nextLine(); // set the next line in file to the item object
+                list.add(item); // add the item to the list
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();;
+        }
+        return(list); // return new list to program
+    }
+
     static String listAdd() { // method that asks for and returns a string, used to get an item to add to the list
         Scanner input = new Scanner(System.in); // Scanner to get an input
         System.out.println("What would you like to add to the list?");
@@ -70,7 +86,7 @@ public class MainMenu {
     public static void main(String[] args) throws IOException {
         boolean exitProg = false;  // bool to control if the program is running
 
-        List toDoList = new ArrayList<>(); // the current list
+        List toDoList = loadList(); // declare the current list as whatever is in the file
 
         do{ // do loop that returns the user to the menu until they chose to exit the program
             String menuChoice = menu();
