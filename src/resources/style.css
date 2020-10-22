@@ -1,0 +1,7 @@
+#root {
+    -fx-background-color: linear-gradient(blue, darkgray);
+}
+#text {-fx-fill: linear-gradient(orange, orangered);}
+AnchorPane {
+    -fx-background-color: linear-gradient(blueviolet, deeppink);
+}

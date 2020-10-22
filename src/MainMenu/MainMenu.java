@@ -1,11 +1,79 @@
+package MainMenu;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
 import java.io.*;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList; // import the ArrayList class
 
-public class MainMenu {
+public class MainMenu extends Application {
+    private Pane view;
+
+    /*public static void main(String[] args) {
+        boolean exitProg = false;  // bool to control if the program is running
+
+        ArrayList<ListObj> toDoList = loadList(); // declare the current list with the loadList method
+
+        do { // do loop that returns the user to the menu until they chose to exit the program
+            String menuChoice = menu();
+            switch (menuChoice) {
+                case "1" -> listAdd(toDoList); // uses the listAdd method to add an item to the list
+                case "2" -> listPrint(toDoList); // listPrint method with the list as a parameter
+                case "3" -> listRemove(toDoList); // run listRemove method that removes an item from a list and set this to the list variable
+                case "4" -> { // this case saves the list to a file when you are finished with the program
+                    System.out.println("Goodbye");
+                    listSave(toDoList); // method to save the toDoList list to a file
+                    exitProg = true;
+                }
+                // default catch all for any invalid inputs the the menu
+                default -> System.out.println("Error try again");
+            }
+        } while (!exitProg);
+    }*/
+
+    public static void main(String[] args) {
+
+        launch(args); // launch the GUI (stage)
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        initUI(stage);
+    }
+
+    private void initUI(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+
+        Scene scene = new Scene(root, 600, 400);
+
+        stage.setTitle("To Do List");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public Pane getPane (String fileName) {
+        try {
+            URL fileURL = MainMenu.class.getResource("/MainMenu/" + fileName + ".fxml");
+            if (fileURL == null){
+                throw new java.io.FileNotFoundException("FXML file not found.");
+            }
+            new FXMLLoader();
+            view = FXMLLoader.load(fileURL);
+        } catch (Exception e) {
+            System.out.println("No page " + fileName + " please check MainMenu.java.");
+        }
+        return view;
+    }
 
     public static class ListObj { // class for list items
         String name;
@@ -15,14 +83,15 @@ public class MainMenu {
 
     static String menu() { // method to print menu and get users choice
         Scanner input = new Scanner(System.in); // Scanner to get an input
-        String menu = ("\n=====================================" +
-                "\nWelcome to the To Do list!" +
-                "\nWhat would you like to do?" +
-                "\n  1. Add to the list" +
-                "\n  2. View the list" +
-                "\n  3. Delete an item from the list" +
-                "\n  4. Save list and exit the program" +
-                "\n=====================================");
+        String menu = ("""
+                =====================================
+                Welcome to the To Do list!
+                What would you like to do?
+                  1. Add to the list
+                  2. View the list
+                  3. Delete an item from the list
+                  4. Save list and exit the program
+                =====================================""");
         System.out.println(menu);
         return (input.next());
     }
@@ -41,10 +110,10 @@ public class MainMenu {
     static void listSave(List<ListObj> list) { // method to write a list to a file
         File file = new File("MyToDoList.txt"); // Declare the file used to store the list
         // FileWriter deleteFile = new FileWriter(file); // this is used to remove the current contents of the file. Which will later be removed when we load a list from a file.
-        try{
+        try {
             int linesToWrite = list.size(); // get the size of the to do list to determine how many lines the program needs to write to the file
             int line = 0; // declare a line to write too
-            for(int i = 0; i < linesToWrite; i++) {
+            for (int i = 0; i < linesToWrite; i++) {
                 saveWriter(list, line, file); // method that gets a list and file to write the list to. Then the line variable is used to determine what object in the list is written to the file
                 line++;
             }
@@ -98,7 +167,7 @@ public class MainMenu {
     }
 
     static void listPrint(List<ListObj> list) { // method to output the list to the user
-        for(int i = 0; i < list.size(); i++){ // for loop that runs the size of the list
+        for (int i = 0; i < list.size(); i++) { // for loop that runs the size of the list
             ListObj item = list.get(i); // get item in list
             String itemName = item.name; // get name of item object
             String dateTime = item.formattedDateTime; // get formatted date and time stamp of item object
@@ -118,33 +187,12 @@ public class MainMenu {
         System.out.println("What is the item number of the item you want to delete?");
         int itemNo = input.nextInt(); // get the item the user wants to remove
         itemNo--; // list index starts at 0 and item numbers are one above
-        if(itemNo > -1 && itemNo < list.size()) {
+        if (itemNo > -1 && itemNo < list.size()) {
             System.out.println("Removing item " + (itemNo + 1) + ": " + list.get(itemNo).name); // output to user the item being removed
             list.remove((itemNo)); // remove item from list
-        }else{ //
+        } else { //
             System.out.println("Error, returning to menu");
         }
     }
 
-    public static void main(String[] args) {
-        boolean exitProg = false;  // bool to control if the program is running
-
-        ArrayList<ListObj> toDoList = loadList(); // declare the current list with the loadList method
-
-        do{ // do loop that returns the user to the menu until they chose to exit the program
-            String menuChoice = menu();
-            switch (menuChoice) {
-                case "1" -> listAdd(toDoList); // uses the listAdd method to add an item to the list
-                case "2" -> listPrint(toDoList); // listPrint method with the list as a parameter
-                case "3" -> listRemove(toDoList); // run listRemove method that removes an item from a list and set this to the list variable
-                case "4" -> { // this case saves the list to a file when you are finished with the program
-                    System.out.println("Goodbye");
-                    listSave(toDoList); // method to save the toDoList list to a file
-                    exitProg = true;
-                }
-                // default catch all for any invalid inputs the the menu
-                default -> System.out.println("Error try again");
-            }
-        }while(!exitProg);
-    }
 }
