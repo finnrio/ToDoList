@@ -107,9 +107,9 @@ public class MainMenu extends Application {
         pw.close(); // close the writer
     }
 
-    static void listSave(List<ListObj> list) { // method to write a list to a file
+    static void listSave(List<ListObj> list) throws IOException { // method to write a list to a file
         File file = new File("MyToDoList.txt"); // Declare the file used to store the list
-        // FileWriter deleteFile = new FileWriter(file); // this is used to remove the current contents of the file. Which will later be removed when we load a list from a file.
+        FileWriter deleteFile = new FileWriter(file); // this is used to remove the current contents of the file. Which will later be removed when we load a list from a file.
         try {
             int linesToWrite = list.size(); // get the size of the to do list to determine how many lines the program needs to write to the file
             int line = 0; // declare a line to write too

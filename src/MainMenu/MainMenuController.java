@@ -18,14 +18,14 @@ public class MainMenuController {
     }
 
     @FXML protected void handleBtn1Action(javafx.event.ActionEvent event) {
-        System.out.println("CLICKED");
-        Button btn = new Button();
-        btn.setText("THE BUTTON");
-        mainPane.setCenter(btn);
+        System.out.println("Add to list button clicked");
+        MainMenu object = new MainMenu();
+        Pane view = object.getPane("AddToList");
+        mainPane.setCenter(view);
     }
 
     @FXML protected void handleBtn2Action(javafx.event.ActionEvent event) {
-        System.out.println("you clicked me!");
+        System.out.println("Print list button clicked");
         MainMenu object = new MainMenu();
         Pane view = object.getPane("PrintList");
         mainPane.setCenter(view);
