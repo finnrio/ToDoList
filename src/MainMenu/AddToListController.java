@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class AddToListController {
 
@@ -33,7 +31,7 @@ public class AddToListController {
         System.out.println("Add button clicked.");
         ArrayList<MainMenu.ListObj> list = MainMenu.loadList();
         String itemName = newItemTB.getText();
-        MainMenu.ListObj itemObj = createListObj(itemName); // creates object
+        MainMenu.ListObj itemObj = createListObj(itemName); // creates new item object
         itemObj.dateTime = LocalDateTime.now(); // set new objects date and time stamp
         itemObj.formattedDateTime = formatDateTime(itemObj.dateTime); // set new objects formatted date and time
         list.add(itemObj);

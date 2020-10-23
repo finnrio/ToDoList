@@ -9,7 +9,7 @@
             <VBox prefWidth="170">
                 <Label text="What would you like to do?" />
                 <VBox GridPane.rowIndex="1">
-                    <Button onAction="#handleBtn1Action" text="Option 1" />
+                    <Button onAction="#handleBtn1Action" text="Add to list" />
                     <Button onAction="#handleBtn2Action" text="Print list" />
                     <Button onAction="#handleBtn3Action" text="Option 3" />
                     <Button onAction="#handleQuitButtonAction" text="Quit" />
