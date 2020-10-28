@@ -2,10 +2,8 @@ package MainMenu;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import java.util.ArrayList;
 
 public class MainMenuController {
 
@@ -32,6 +30,10 @@ public class MainMenuController {
     }
 
     @FXML protected void handleBtn3Action(javafx.event.ActionEvent event) {
+        System.out.println("List remove button clicked");
+        MainMenu object = new MainMenu();
+        Pane view = object.getPane("ListRemove");
+        mainPane.setCenter(view);
     }
 
 }

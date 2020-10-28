@@ -1,7 +1,30 @@
-#root {
-    -fx-background-color: linear-gradient(blue, darkgray);
+* {
+    -fx-font-family: "American Typewriter";
+    -fx-font-size: 15;
 }
-#text {-fx-fill: linear-gradient(orange, orangered);}
 AnchorPane {
-    -fx-background-color: linear-gradient(blueviolet, deeppink);
+    -fx-background-color: antiquewhite;
+    -fx-min-width: 430;
+    -fx-max-height: 400;
+}
+#printListBackground {
+    -fx-background-color: antiquewhite;
+}
+#mainPane {
+    -fx-background-color: lightgrey;
+}
+#removePane {
+    -fx-background-color: antiquewhite;
+}
+#printPane {
+    -fx-background: antiquewhite;
+}
+#listLabel {
+    -fx-background-color: antiquewhite;
+    -fx-padding: 15;
+    -fx-font-size: 14;
+}
+#menuLabel {
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
 }

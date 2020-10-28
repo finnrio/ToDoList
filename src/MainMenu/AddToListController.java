@@ -1,10 +1,8 @@
 package MainMenu;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +11,7 @@ import java.util.ArrayList;
 public class AddToListController {
 
     public TextField newItemTB;
-    public Button AddBtn;
+    public Label addedLabel;
 
     static String formatDateTime(LocalDateTime DT) { // method to format
         // for date and time stamp
@@ -37,5 +35,7 @@ public class AddToListController {
         list.add(itemObj);
         MainMenu.listSave(list);
         System.out.println("New list saved.");
+        addedLabel.setText("Item added");
+        newItemTB.clear();
     }
 }

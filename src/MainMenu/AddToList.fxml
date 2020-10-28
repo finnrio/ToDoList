@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="MainMenu.AddToListController"
-            prefHeight="400.0" prefWidth="430.0">
-    <VBox>
+<AnchorPane prefHeight="400.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainMenu.AddToListController">
+    <VBox spacing="5.0">
         <Label text="What would you like to add to the list?" />
-        <TextField fx:id="newItemTB" prefHeight="300" prefWidth="400"/>
-        <Button text="Add" onAction="#handleAddButtonAction"/>
+        <TextField fx:id="newItemTB" prefHeight="300" prefWidth="400" />
+        <HBox spacing="10.0">
+            <Button onAction="#handleAddButtonAction" text="Add" />
+            <Label fx:id="addedLabel" />
+        </HBox>
+      <padding>
+         <Insets left="5.0" top="5.0" />
+      </padding>
     </VBox>
 </AnchorPane>

@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainMenu.MainMenuController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="/resources/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainMenu.MainMenuController">
     <BorderPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0">
         <left>
-            <VBox prefWidth="170">
-                <Label text="What would you like to do?" />
-                <VBox GridPane.rowIndex="1">
+            <VBox prefWidth="170" spacing="8">
+                <Label fx:id="menuLabel" text="What would you like to do?" wrapText="true" />
+                <VBox spacing="5" GridPane.rowIndex="1">
                     <Button onAction="#handleBtn1Action" text="Add to list" />
                     <Button onAction="#handleBtn2Action" text="Print list" />
-                    <Button onAction="#handleBtn3Action" text="Option 3" />
+                    <Button onAction="#handleBtn3Action" text="Remove an item" />
                     <Button onAction="#handleQuitButtonAction" text="Quit" />
                 </VBox>
+            <BorderPane.margin>
+               <Insets />
+            </BorderPane.margin>
+            <padding>
+               <Insets left="3.0" right="3.0" top="5.0" />
+            </padding>
             </VBox>
         </left>
     </BorderPane>
