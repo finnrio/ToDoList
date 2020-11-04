@@ -1,4 +1,4 @@
-package MainMenu;
+package main.java;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainMenu extends Application {
+public class Main extends Application {
     private Pane view;
 
     public static void main(String[] args) {
@@ -37,7 +37,7 @@ public class MainMenu extends Application {
 
     public Pane getPane (String fileName) {
         try {
-            URL fileURL = MainMenu.class.getResource("/MainMenu/" + fileName + ".fxml");
+            URL fileURL = Main.class.getResource("/MainMenu/" + fileName + ".fxml");
             if (fileURL == null){
                 throw new java.io.FileNotFoundException("FXML file not found.");
             }

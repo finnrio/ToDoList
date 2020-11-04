@@ -1,4 +1,4 @@
-package MainMenu;
+package main.java;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,10 +10,10 @@ public class ListRemoveController {
     public Button removeBtn;
     public ChoiceBox<String> listChoiceBox;
 
-    ArrayList<MainMenu.ListObj> list;
+    ArrayList<Main.ListObj> list;
 
     @FXML void initialize() {
-        list = MainMenu.loadList();
+        list = Main.loadList();
         int listSize = list.size();
         for (int i = 0; i < listSize; i++) {
             String item = list.get(i).name;
@@ -30,7 +30,7 @@ public class ListRemoveController {
             if (toRemove < list.size()) {
                 System.out.println("Removing item " + (toRemove + 1) + ": " + list.get(toRemove).name); // output to user the item being removed
                 list.remove((toRemove)); // remove item from list
-                MainMenu.listSave(list);
+                Main.listSave(list);
                 listChoiceBox.getItems().clear();
                 initialize();
             }

@@ -1,4 +1,4 @@
-package MainMenu;
+package main.java;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -19,21 +19,21 @@ public class AddToListController {
         return DT.format(formatter); // return the formatted date and time
     }
 
-    static MainMenu.ListObj createListObj(String itemName) { // method to create an object
-        MainMenu.ListObj itemObj = new MainMenu.ListObj(); // create a new object
+    static Main.ListObj createListObj(String itemName) { // method to create an object
+        Main.ListObj itemObj = new Main.ListObj(); // create a new object
         itemObj.name = itemName; // set new objects name
         return itemObj;
     }
 
     public void handleAddButtonAction(ActionEvent actionEvent) throws IOException {
         System.out.println("Add button clicked.");
-        ArrayList<MainMenu.ListObj> list = MainMenu.loadList();
+        ArrayList<Main.ListObj> list = Main.loadList();
         String itemName = newItemTB.getText();
-        MainMenu.ListObj itemObj = createListObj(itemName); // creates new item object
+        Main.ListObj itemObj = createListObj(itemName); // creates new item object
         itemObj.dateTime = LocalDateTime.now(); // set new objects date and time stamp
         itemObj.formattedDateTime = formatDateTime(itemObj.dateTime); // set new objects formatted date and time
         list.add(itemObj);
-        MainMenu.listSave(list);
+        Main.listSave(list);
         System.out.println("New list saved.");
         addedLabel.setText("Item added");
         newItemTB.clear();

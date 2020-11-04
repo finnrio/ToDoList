@@ -1,4 +1,4 @@
-package MainMenu;
+package main.java;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -14,10 +14,10 @@ public class PrintListController {
     String toDoList;
 
     public PrintListController() { // method to output the list to the user
-        ArrayList<MainMenu.ListObj> list = MainMenu.loadList();
+        ArrayList<Main.ListObj> list = Main.loadList();
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < list.size(); i++) { // for loop that runs the size of the list
-            MainMenu.ListObj item = list.get(i); // get item in list
+            Main.ListObj item = list.get(i); // get item in list
             String itemName = item.name; // get name of item object
             String dateTime = item.formattedDateTime; // get formatted date and time stamp of item object
             int position = i + 1; // get position in list

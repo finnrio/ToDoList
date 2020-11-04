@@ -1,4 +1,4 @@
-package MainMenu;
+package main.java;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -17,21 +17,21 @@ public class MainMenuController {
 
     @FXML protected void handleBtn1Action(javafx.event.ActionEvent event) {
         System.out.println("Add to list button clicked");
-        MainMenu object = new MainMenu();
+        Main object = new Main();
         Pane view = object.getPane("AddToList");
         mainPane.setCenter(view);
     }
 
     @FXML protected void handleBtn2Action(javafx.event.ActionEvent event) {
         System.out.println("Print list button clicked");
-        MainMenu object = new MainMenu();
+        Main object = new Main();
         Pane view = object.getPane("PrintList");
         mainPane.setCenter(view);
     }
 
     @FXML protected void handleBtn3Action(javafx.event.ActionEvent event) {
         System.out.println("List remove button clicked");
-        MainMenu object = new MainMenu();
+        Main object = new Main();
         Pane view = object.getPane("ListRemove");
         mainPane.setCenter(view);
     }
