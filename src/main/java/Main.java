@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.io.*;
@@ -37,7 +38,7 @@ public class Main extends Application {
 
     public Pane getPane (String fileName) {
         try {
-            URL fileURL = Main.class.getResource("/MainMenu/" + fileName + ".fxml");
+            URL fileURL = Main.class.getResource("/main/java/" + fileName + ".fxml");
             if (fileURL == null){
                 throw new java.io.FileNotFoundException("FXML file not found.");
             }
@@ -104,8 +105,12 @@ public class Main extends Application {
                 list.add(listObj); // add the object to the list
             }
             reader2.close(); //close the reader
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("The List does not yet exist.");
+            alert.showAndWait();
         }
         return list; // return new list to program
     }
