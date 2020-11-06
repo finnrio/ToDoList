@@ -1,3 +1,5 @@
+package main.java;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +17,7 @@ public class Main extends Application {
     private Pane view;
 
     public static void main(String[] args) {
-
+        initList(); // creates an empty list if there is not a list already in the project directory
         launch(args); // launch the GUI (stage)
     }
 
@@ -24,7 +26,7 @@ public class Main extends Application {
         initUI(stage);
     }
 
-    private void initUI(Stage stage) throws IOException {
+    public static void initUI(Stage stage) throws IOException {
         File file = new File("src/main/java/MainMenu.fxml");
         URL fileURL = file.toURL();
         Parent root = FXMLLoader.load(fileURL);
@@ -38,7 +40,7 @@ public class Main extends Application {
 
     public Pane getPane (String fileName) {
         try {
-            URL fileURL = Main.class.getResource("/java/" + fileName + ".fxml");
+            URL fileURL = Main.class.getResource("/main/java/" + fileName + ".fxml");
             if (fileURL == null){
                 throw new java.io.FileNotFoundException("FXML file not found.");
             }
@@ -68,9 +70,10 @@ public class Main extends Application {
         pw.close(); // close the writer
     }
 
-    static void listSave(List<ListObj> list) throws IOException { // method to write a list to a file
+    public static void listSave(List<ListObj> list) throws IOException { // method to write a list to a file
         File file = new File("MyToDoList.txt"); // Declare the file used to store the list
         FileWriter deleteFile = new FileWriter(file); // this is used to remove the current contents of the file. Which will later be removed when we load a list from a file.
+        deleteFile.close();
         try {
             int linesToWrite = list.size(); // get the size of the to do list to determine how many lines the program needs to write to the file
             int line = 0; // declare a line to write too
@@ -83,7 +86,18 @@ public class Main extends Application {
         }
     }
 
-    static ArrayList<ListObj> loadList() { // create a new list by reading a file
+    private static void initList() { // method to create empty list file if none exists in project directory
+        try {
+            File file = new File("MyToDoList.txt");
+            if(!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static ArrayList<ListObj> loadList() { // create a new list by reading a file
         ArrayList<ListObj> list = new ArrayList<>(); // declare list
         try {
             File file = new File("MyToDoList.txt"); // declare file
@@ -106,7 +120,7 @@ public class Main extends Application {
             }
             reader2.close(); //close the reader
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.toString());
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setContentText("The List does not yet exist.");

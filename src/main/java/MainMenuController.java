@@ -1,3 +1,5 @@
+package main.java;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
