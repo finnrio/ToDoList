@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane stylesheets="/main/resources/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.PrintListController">
+<AnchorPane stylesheets="/resources/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PrintListController">
     <ScrollPane prefHeight="400" prefWidth="430" fx:id="printPane">
         <HBox fx:id="printListBackground" alignment="CENTER" prefWidth="410">
             <Label fx:id="listLabel" text="Hello World" />

@@ -1,5 +1,3 @@
-package main.java;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,7 +25,9 @@ public class Main extends Application {
     }
 
     private void initUI(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+        File file = new File("src/main/java/MainMenu.fxml");
+        URL fileURL = file.toURL();
+        Parent root = FXMLLoader.load(fileURL);
 
         Scene scene = new Scene(root, 600, 400);
 
@@ -38,14 +38,14 @@ public class Main extends Application {
 
     public Pane getPane (String fileName) {
         try {
-            URL fileURL = Main.class.getResource("/main/java/" + fileName + ".fxml");
+            URL fileURL = Main.class.getResource("/java/" + fileName + ".fxml");
             if (fileURL == null){
                 throw new java.io.FileNotFoundException("FXML file not found.");
             }
             new FXMLLoader();
             view = FXMLLoader.load(fileURL);
         } catch (Exception e) {
-            System.out.println("No page " + fileName + " please check MainMenu.java.");
+            System.out.println("No page " + fileName + " please check main.java.");
             System.out.println(e);
         }
         return view;
