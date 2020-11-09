@@ -12,6 +12,7 @@ public class AddToListController {
 
     public TextField newItemTB;
     public Label addedLabel;
+    public static ArrayList<Main.ListObj> list = Main.loadList(Main.listFile);
 
     static String formatDateTime(LocalDateTime DT) { // method to format
         // for date and time stamp
@@ -27,15 +28,19 @@ public class AddToListController {
 
     public void handleAddButtonAction(ActionEvent actionEvent) throws IOException {
         System.out.println("Add button clicked.");
-        ArrayList<Main.ListObj> list = Main.loadList();
         String itemName = newItemTB.getText();
+        addToList(list, itemName);
+        Main.listSave(list, "MyToDoList");
+        System.out.println("New list saved.");
+        addedLabel.setText("Item added");
+        newItemTB.clear();
+    }
+
+    public static ArrayList<Main.ListObj> addToList(ArrayList<Main.ListObj> list, String itemName) throws IOException {
         Main.ListObj itemObj = createListObj(itemName); // creates new item object
         itemObj.dateTime = LocalDateTime.now(); // set new objects date and time stamp
         itemObj.formattedDateTime = formatDateTime(itemObj.dateTime); // set new objects formatted date and time
         list.add(itemObj);
-        Main.listSave(list);
-        System.out.println("New list saved.");
-        addedLabel.setText("Item added");
-        newItemTB.clear();
+        return list;
     }
 }

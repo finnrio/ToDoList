@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.io.*;
@@ -16,8 +15,10 @@ import java.util.List;
 public class Main extends Application {
     private Pane view;
 
+    final public static String listFile = "MyToDoList";
+
     public static void main(String[] args) {
-        initList(); // creates an empty list if there is not a list already in the project directory
+        initList(listFile); // creates an empty list if there is not a list already in the project directory
         launch(args); // launch the GUI (stage)
     }
 
@@ -48,13 +49,13 @@ public class Main extends Application {
             view = FXMLLoader.load(fileURL);
         } catch (Exception e) {
             System.out.println("No page " + fileName + " please check main.java.");
-            System.out.println(e);
+            System.out.println(e.toString());
         }
         return view;
     }
 
     public static class ListObj { // class for list items
-        String name;
+        public String name;
         LocalDateTime dateTime;
         String formattedDateTime;
     }
@@ -70,8 +71,8 @@ public class Main extends Application {
         pw.close(); // close the writer
     }
 
-    public static void listSave(List<ListObj> list) throws IOException { // method to write a list to a file
-        File file = new File("MyToDoList.txt"); // Declare the file used to store the list
+    public static void listSave(List<ListObj> list, String fileName) throws IOException { // method to write a list to a file
+        File file = new File(fileName + ".txt"); // Declare the file used to store the list
         FileWriter deleteFile = new FileWriter(file); // this is used to remove the current contents of the file. Which will later be removed when we load a list from a file.
         deleteFile.close();
         try {
@@ -81,26 +82,28 @@ public class Main extends Application {
                 saveWriter(list, line, file); // method that gets a list and file to write the list to. Then the line variable is used to determine what object in the list is written to the file
                 line++;
             }
+            System.out.println("List saved");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void initList() { // method to create empty list file if none exists in project directory
+
+    public static void initList(String fileName) { // method to create empty list file if none exists in project directory
         try {
-            File file = new File("MyToDoList.txt");
+            File file = new File(fileName + ".txt");
             if(!file.exists()) {
                 file.createNewFile();
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.toString());
         }
     }
 
-    public static ArrayList<ListObj> loadList() { // create a new list by reading a file
+    public static ArrayList<ListObj> loadList(String fileName) { // create a new list by reading a file
         ArrayList<ListObj> list = new ArrayList<>(); // declare list
         try {
-            File file = new File("MyToDoList.txt"); // declare file
+            File file = new File(fileName + ".txt"); // declare file
             // this block of code is used to get the number of lines in the file
             BufferedReader reader1 = new BufferedReader(new FileReader(file)); // create a reader for the file.
             int noOfLines = 0;
@@ -121,10 +124,6 @@ public class Main extends Application {
             reader2.close(); //close the reader
         } catch (Exception e) {
             System.out.println(e.toString());
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("The List does not yet exist.");
-            alert.showAndWait();
         }
         return list; // return new list to program
     }

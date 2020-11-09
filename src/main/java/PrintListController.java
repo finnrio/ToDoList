@@ -14,7 +14,15 @@ public class PrintListController {
     String toDoList;
 
     public PrintListController() { // method to output the list to the user
-        ArrayList<Main.ListObj> list = Main.loadList();
+        ArrayList<Main.ListObj> list = Main.loadList(Main.listFile);
+        toDoList = printList(list);
+    }
+
+    @FXML private void initialize() {
+        listLabel.setText(toDoList);
+    }
+
+    public static String printList(ArrayList<Main.ListObj> list) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < list.size(); i++) { // for loop that runs the size of the list
             Main.ListObj item = list.get(i); // get item in list
@@ -23,10 +31,6 @@ public class PrintListController {
             int position = i + 1; // get position in list
             stringBuilder.append(position).append(". ").append(itemName).append("\n     ").append(dateTime).append("\n"); // prints the list item position followed by the name and date and time stamp
         }
-        toDoList = stringBuilder.toString();
-    }
-
-    @FXML private void initialize() {
-        listLabel.setText(toDoList);
+        return stringBuilder.toString();
     }
 }
