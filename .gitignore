@@ -1,3 +1,6 @@
 .idea/
 /MyToDoList.txt
 /ToDoListGUI.iml
+/SystemTestList.txt
+.out/
+.target/

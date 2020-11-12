@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SystemTest {
@@ -50,13 +51,15 @@ public class SystemTest {
     @Test
     @DisplayName("Remove test")
     @Order(3)
-    void removeTest() throws IOException {
+    void removeTest() {
         ArrayList<Main.ListObj> tempList = Main.loadList(fileName);
-        long startTime = System.currentTimeMillis();
-        ListRemoveController.clearList(tempList);
-        long endTime = System.currentTimeMillis();
-        long timeTaken = endTime - startTime;
-        Main.listSave(tempList, fileName);
-        System.out.println("System took: " + timeTaken + " milliseconds to save a list with " + items + " items. ");
+        try{
+            ListRemoveController.removeItem(tempList, 0);
+            tempList = ListRemoveController.clearList();
+            Main.listSave(tempList, fileName);
+            System.out.println("System successfully removed an item from the list and has now cleared the entire list");
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
 }

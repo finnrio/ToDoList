@@ -52,24 +52,19 @@ public class ListRemoveController {
         return list;
     }
 
-    public static ArrayList<Main.ListObj> clearList(ArrayList<Main.ListObj> list) throws IOException {
-        int listLength = list.size();
-        for (int i = 0; i < listLength; i++) {
-            removeItem(list, 0);
-        }
-        return list;
+
+    public static ArrayList<Main.ListObj> clearList() {
+        return new ArrayList<>();
     }
 
     public void handleClearBtnAction(ActionEvent actionEvent) {
-        ArrayList<Main.ListObj> list = Main.loadList(Main.listFile);
         try {
             System.out.println("Clearing list.");
-            clearList(list);
+            ArrayList<Main.ListObj> list = clearList();
             Main.listSave(list, Main.listFile);
             initialize();
         } catch (Exception e) {
             System.out.println(e.toString());
         }
-
     }
 }
