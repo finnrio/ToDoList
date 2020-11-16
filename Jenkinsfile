@@ -4,7 +4,7 @@ pipeline {
         stage("Test"){
             steps {
                 echo "Hello world..."
-                echo "This is build $BUILD_NUMBER of demo $DEMO"
+                echo "This is build "
             }
         }
         stage("Build"){
