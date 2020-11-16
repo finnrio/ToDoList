@@ -4,6 +4,7 @@ pipeline {
         stage("Test"){
             steps {
                 echo "Hello world..."
+                java test/MainTest.java
             }
         }
         stage("Build"){
