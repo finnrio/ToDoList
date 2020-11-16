@@ -5,7 +5,6 @@ import org.junit.jupiter.api.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SystemTest {

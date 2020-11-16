@@ -10,10 +10,10 @@
             <VBox prefWidth="170" spacing="8">
                 <Label fx:id="menuLabel" text="What would you like to do?" wrapText="true" />
                 <VBox spacing="5" GridPane.rowIndex="1">
-                    <Button onAction="#handleBtn1Action" text="Add to list" />
-                    <Button onAction="#handleBtn2Action" text="Print list" />
-                    <Button onAction="#handleBtn3Action" text="Remove an item" />
-                    <Button onAction="#handleQuitButtonAction" text="Quit" />
+                    <Button fx:id="Btn1" onAction="#handleBtn1Action" text="Add to list" />
+                    <Button fx:id="Btn2" onAction="#handleBtn2Action" text="Print list" />
+                    <Button fx:id="Btn3" onAction="#handleBtn3Action" text="Remove an item" />
+                    <Button fx:id="quitBtn" onAction="#handleQuitButtonAction" text="Quit" />
                 </VBox>
             <BorderPane.margin>
                <Insets />

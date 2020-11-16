@@ -9,8 +9,6 @@ public class MainMenuController {
 
     @FXML public BorderPane mainPane;
 
-    //ArrayList<MainMenu.ListObj> toDoList = MainMenu.loadList(); // declare the current list with the loadList method
-
     @FXML protected void handleQuitButtonAction(javafx.event.ActionEvent event) {
         Platform.exit();
     }
