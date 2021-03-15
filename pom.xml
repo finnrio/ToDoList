@@ -33,10 +33,5 @@
             <version>5.6.3</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>de.saxsys</groupId>
-            <artifactId>jfx-testrunner</artifactId>
-            <version>1.2</version>
-        </dependency>
     </dependencies>
 </project>

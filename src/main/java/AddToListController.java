@@ -31,7 +31,6 @@ public class AddToListController {
         String itemName = newItemTB.getText();
         addToList(list, itemName);
         Main.listSave(list, "MyToDoList");
-        System.out.println("New list saved.");
         addedLabel.setText("Item added");
         newItemTB.clear();
     }

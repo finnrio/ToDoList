@@ -82,7 +82,6 @@ public class Main extends Application {
                 saveWriter(list, line, file); // method that gets a list and file to write the list to. Then the line variable is used to determine what object in the list is written to the file
                 line++;
             }
-            System.out.println("List saved");
         } catch (IOException e) {
             e.printStackTrace();
         }

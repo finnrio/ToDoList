@@ -13,15 +13,11 @@ public class ListRemoveController {
 
     @FXML
     void initialize() {
-        System.out.println("Initialising");
         listChoiceBox.getItems().clear();
         ArrayList<Main.ListObj> list = Main.loadList(Main.listFile);
         int listSize = list.size();
         for (int i = 0; i < listSize; i++) {
             String item = list.get(i).name;
-            System.out.println("item name: " + item);
-            System.out.println("item position: " + i);
-
             String listItem = (i + 1) + ". " + item;
             listChoiceBox.getItems().add(listItem);
         }
@@ -32,7 +28,6 @@ public class ListRemoveController {
         ArrayList<Main.ListObj> list = Main.loadList(Main.listFile);
         try {
             int toRemove = listChoiceBox.getSelectionModel().getSelectedIndex();
-            System.out.println(toRemove);
             if (toRemove < list.size()) {
                 removeItem(list, toRemove);
                 Main.listSave(list, Main.listFile);
@@ -45,8 +40,7 @@ public class ListRemoveController {
     }
 
     public static ArrayList<Main.ListObj> removeItem(ArrayList<Main.ListObj> list, int itemPosition) {
-        System.out.println("Removing item: " + list.get(itemPosition).name); // output to user the item being removed
-        list.remove((itemPosition)); // remove item from list
+        list.remove((itemPosition));
         return list;
     }
 
@@ -57,7 +51,6 @@ public class ListRemoveController {
 
     public void handleClearBtnAction(ActionEvent actionEvent) {
         try {
-            System.out.println("Clearing list.");
             ArrayList<Main.ListObj> list = clearList();
             Main.listSave(list, Main.listFile);
             initialize();
