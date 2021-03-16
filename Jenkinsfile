@@ -10,5 +10,11 @@ pipeline {
                 sh "echo 'chassis' > build/car.txt"
             }
         }
+        stage("Test"){
+            steps{
+                sh "test -f build/car.txt"
+                sh "grep 'chassis' build/car.txt"
+            }
+        }
     }
 }
