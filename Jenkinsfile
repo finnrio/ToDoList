@@ -13,7 +13,7 @@ pipeline {
         }
         stage("New stage"){
             steps {
-                echo "A new stage added."
+                echo "A new stage added. testing"
             }
         }
     }
