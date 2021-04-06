@@ -8,7 +8,7 @@ pipeline {
                 sh "rm -rf build"
                 sh "mkdir build"
                 sh "touch build/car.txt"
-                sh "echo 'chassis' > build/car.txt"
+                sh "echo 'chassisesse' > build/car.txt"
             }
         }
         stage("Test"){
